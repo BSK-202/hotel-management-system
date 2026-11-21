@@ -1,10 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { Room, RoomList } from './rooms.interface';
 import { CommonModule } from '@angular/common';
+import { RoomsList } from './rooms-list/rooms-list';
 
 @Component({
   selector: 'hia-rooms',
-  imports: [CommonModule],
+  imports: [CommonModule, RoomsList],
   templateUrl: './rooms.html',
   styleUrl: './rooms.css',
 })
@@ -13,6 +14,8 @@ export class Rooms implements OnInit{
 hotelName = 'Rosewood Hong Kong';//binding interpolation
 numberOfRooms = 10;//prperty binding
 hiddenRooms = false;//always in DOM
+
+selectedRoom!: RoomList;
 
 //rooms: Room | undefined;
 rooms: Room = {
@@ -60,8 +63,14 @@ ngOnInit(): void {
   ]
   
 }
+
 toggle(){ //event binding
    this.hiddenRooms = !this.hiddenRooms;
+}
+
+selectRoom(room: RoomList){
+  //console.log(room);
+  this.selectedRoom = room;
 }
 
 
