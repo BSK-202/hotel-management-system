@@ -11,7 +11,7 @@
       "schematics": {},
       "root": "",
       "sourceRoot": "src",
-      "prefix": "app",
+      "prefix": "hia",
       "architect": {
         "build": {
           "builder": "@angular/build:application",
@@ -25,7 +25,8 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.scss",
+              "bootstrap/dist/css/bootstrap.min.css"
             ]
           },
           "configurations": {

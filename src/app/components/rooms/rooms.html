@@ -1,0 +1,50 @@
+<h1>Welcome to {{hotelName}}</h1>
+
+<div [hidden]="hiddenRooms">
+Number of rooms available:
+<div [ngStyle]="{'background-color': rooms.availableRooms > 0 ? 'green' : 'red', 'color':'white'}"
+[innerText]="numberOfRooms">
+</div>
+<!-- {{ roomList | json}} / just for debuging non in production-->
+</div>
+<!--{{ rooms?.availableRooms ?? 'No rooms available' }}-->
+@if (rooms.availableRooms > 0){
+
+    <div>
+        Room List
+       <table class="table">
+        <tr>
+            <th>Index</th>
+            <th>Even/Odd</th>
+            <th>Room Number</th>
+            <th>Room Type</th>
+            <th>Price</th>
+            <th>Amenities</th>
+            <th>Photos</th>
+            <th>Check-in Time</th>
+            <th>check-out Time</th>
+            <th>Rating</th>
+        </tr>
+        @for (room of roomList | slice: 0:2; track room.roomNumber; let e = $even, o = $odd, i=$index)
+        {
+                <tr [ngClass]="e? 'even' : 'odd'">
+                    <td>{{i}}</td>
+                   <td>{{e? 'Even' : 'Odd'}}</td>
+                   <td>{{ room.roomNumber}}</td>
+                   <td>{{ room.roomType}}</td>
+                   <td>{{ room.price | currency: 'DH'}}</td>
+                   <td>{{ room.amenities | titlecase}}</td>
+                   <td><img [src]="room.photos" width="100" height="100" [alt]="room.roomType"></td>
+                   <td>{{ room.checkinTime | date : 'M/d/yy, h:mm a'}}</td>
+                   <td>{{ room.checkoutTime | date : 'M/d/yy, h:mm a'}}</td>
+                   <td>{{ room.rating | number:'1.0-1': 'en'}}</td>
+                </tr>
+        }
+       
+      
+       </table>
+    </div>
+}
+
+
+<button (click)="toggle()">Toggle</button>
